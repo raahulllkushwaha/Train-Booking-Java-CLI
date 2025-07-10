@@ -31,5 +31,10 @@ public class UserService {
         System.out.println("Welcome: " + currentUser.getFullName() + "!");
         return true;
     }
-
+public void logOutUser(){
+        if(currentUser != null){
+            System.out.println("Logged Out " + currentUser.getFullName());
+        }
+        currentUser = null;
+    }
 }
