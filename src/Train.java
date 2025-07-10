@@ -15,4 +15,69 @@ public class Train {
         this.totalSeats = totalSeats;
         this.avilableSeats = totalSeats;
     }
+
+    public int getTrainId() {
+        return trainId;
+    }
+
+    public void setTrainId(int trainId) {
+        this.trainId = trainId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public int getTotalSeats() {
+        return totalSeats;
+    }
+
+    public void setTotalSeats(int totalSeats) {
+        this.totalSeats = totalSeats;
+    }
+
+    public int getAvilableSeats() {
+        return avilableSeats;
+    }
+
+    public void setAvilableSeats(int avilableSeats) {
+        this.avilableSeats = avilableSeats;
+    }
+
+    public boolean bookSeats(int count){
+        if(count <= avilableSeats){
+            avilableSeats -= count;
+            return true;
+        }
+        return false;
+    }
+
+    public void cancelSeats(int count){
+        avilableSeats += count;
+    }
+
+    @Override
+    public String toString() {
+        return trainId + " | " + name + " | " + source + " | " + destination + " | " + " Seats Avilable: " + avilableSeats;
+    }
 }
