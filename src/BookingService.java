@@ -29,7 +29,7 @@ public class BookingService {
         return res;
     }
 
-    private Ticket bookTicket(User user, int trainId, int seatCount){
+    public Ticket bookTicket(User user, int trainId, int seatCount){
         for (Train train: trainList){
             if(train.getTrainId() == trainId){
                 if(train.bookSeats(seatCount)){
@@ -38,7 +38,7 @@ public class BookingService {
                     return ticket;
                 }
                 else{
-                    System.out.println("No enough seats avilable");
+                    System.out.println("No enough seats available");
                     return null;
                 }
             }
@@ -65,7 +65,7 @@ public class BookingService {
                 Train train = ticket.getTrain();
                 train.cancelSeats(ticket.getSeatBooked());
                 iterator.remove();
-                System.out.println("Tickedt " + ticketId + "Cancelled successfully");
+                System.out.println("Ticket " + ticketId + "Cancelled successfully");
                 return true;
             }
         }

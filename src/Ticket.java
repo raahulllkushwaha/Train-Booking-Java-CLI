@@ -6,7 +6,7 @@ public class Ticket {
     private int seatBooked;
 
     private static int counter = 1001;
-    public Ticket(int ticketId, User user, Train train, int seatBooked) {
+    public Ticket(User user, Train train, int seatBooked) {
         this.ticketId = counter++;
         this.user = user;
         this.train = train;

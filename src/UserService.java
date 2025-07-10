@@ -17,7 +17,7 @@ public class UserService {
     }
 
     public boolean loginUser(String username, String password) {
-        if (userMap.containsKey(username)) {
+        if (!userMap.containsKey(username)) {
             System.out.println("No user exist with " + "'" + username + "'" + " this username");
             return false;
         }
