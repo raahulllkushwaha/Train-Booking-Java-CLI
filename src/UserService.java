@@ -37,4 +37,11 @@ public void logOutUser(){
         }
         currentUser = null;
     }
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public boolean isLoggedIn(){
+        return currentUser != null;
+    }
 }
