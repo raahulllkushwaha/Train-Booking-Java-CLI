@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class BookingService {
     private List<Train> trainList = new ArrayList<>();
@@ -25,5 +27,57 @@ public class BookingService {
             }
         }
         return res;
+    }
+
+    private Ticket bookTicket(User user, int trainId, int seatCount){
+        for (Train train: trainList){
+            if(train.getTrainId() == trainId){
+                if(train.bookSeats(seatCount)){
+                    Ticket ticket = new Ticket(user, train, seatCount);
+                    ticketList.add(ticket);
+                    return ticket;
+                }
+                else{
+                    System.out.println("No enough seats avilable");
+                    return null;
+                }
+            }
+        }
+        System.out.println("Train id not found");
+        return null;
+    }
+
+    public List<Ticket> getTicketByUser(User user) {
+       List<Ticket> res = new ArrayList<>();
+       for (Ticket ticket: ticketList){
+           if(ticket.getUser().getUsername().equalsIgnoreCase(user.getUsername())){
+               res.add(ticket);
+           }
+       }
+       return res;
+    }
+
+    public boolean cancelTicket(int ticketId, User user){
+        Iterator<Ticket> iterator = ticketList.listIterator();
+        while ((iterator.hasNext())){
+            Ticket ticket = iterator.next();
+            if(ticket.getTicketId() == ticketId && ticket.getUser().getUsername().equalsIgnoreCase(user.getUsername())){
+                Train train = ticket.getTrain();
+                train.cancelSeats(ticket.getSeatBooked());
+                iterator.remove();
+                System.out.println("Tickedt " + ticketId + "Cancelled successfully");
+                return true;
+            }
+        }
+        System.out.println("Ticket not found or does not belong to current user");
+        return false;
+    }
+
+
+    public void listAllTrains(){
+        System.out.println("List of all trains: ");
+        for(Train train: trainList){
+            System.out.println(train);
+        }
     }
 }
