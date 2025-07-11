@@ -1,6 +1,8 @@
 import java.util.List;
 import java.util.Scanner;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 public class IRCTC {
     private final Scanner scanner = new Scanner(System.in);
     private final UserService userService = new UserService();
@@ -9,7 +11,18 @@ public class IRCTC {
     public static void main(String[] args) {
         new IRCTC().start();
     }
-
+    private LocalDate getDateInput(String prompt) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        while (true) {
+            try {
+                System.out.println(prompt + " (dd-MM-yyyy format): ");
+                String dateStr = scanner.next();
+                return LocalDate.parse(dateStr, formatter);
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date format. Please use dd-MM-yyyy format (e.g., 15-07-2025)");
+            }
+        }
+    }
     public void start() {
         while (true) {
             System.out.println("Welcome to IRCTC APP");
@@ -93,9 +106,12 @@ public class IRCTC {
         System.out.println("Enter destination station: ");
         String destination = scanner.next();
 
-        List<Train> trains = bookingService.searchTrain(source, destination);
+        LocalDate searchDate = getDateInput("Enter travel date");
+        List<Train> trains = bookingService.searchTrainByDate(source, destination, searchDate);
         if (trains.isEmpty()) {
-            System.out.println("No trains found between " + source + " and " + destination + " station.");
+            System.out.println("No trains found between " + source + " and " + destination +
+                    " on " + searchDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+            return;
         }
         System.out.println("Trains found: ");
         for (Train train : trains) {
@@ -128,9 +144,11 @@ public class IRCTC {
         System.out.println("Enter destination station: ");
         String destination = scanner.next();
 
-        List<Train> trains = bookingService.searchTrain(source, destination);
+        LocalDate searchDate = getDateInput("Enter travel date");
+
+        List<Train> trains = bookingService.searchTrainByDate(source, destination, searchDate);
         if (trains.isEmpty()) {
-            System.out.println("No trains available");
+            System.out.println("No trains available for the selected date");
             return;
         }
         System.out.println("Available Trains: ");

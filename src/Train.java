@@ -1,19 +1,52 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 public class Train {
     private int trainId;
     private String name;
     private String source;
     private String destination;
+    private LocalDate departureDate;
+    private LocalTime departureTime;
+    private LocalTime arrivalTime;
 
     private int totalSeats;
     private int avilableSeats = 100;
 
-    public Train(int trainId, String name, String source, String destination, int totalSeats) {
+    public Train(int trainId, String name, String source, String destination, int totalSeats,
+                 LocalDate departureDate, LocalTime departureTime, LocalTime arrivalTime) {
         this.trainId = trainId;
         this.name = name;
         this.source = source;
         this.destination = destination;
         this.totalSeats = totalSeats;
         this.avilableSeats = totalSeats;
+        this.departureDate = departureDate;
+        this.departureTime = departureTime;
+        this.arrivalTime = arrivalTime;
+    }
+    public LocalDate getDepartureDate() {
+        return departureDate;
+    }
+
+    public void setDepartureDate(LocalDate departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public LocalTime getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(LocalTime departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public LocalTime getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(LocalTime arrivalTime) {
+        this.arrivalTime = arrivalTime;
     }
 
     public int getTrainId() {
@@ -78,6 +111,12 @@ public class Train {
 
     @Override
     public String toString() {
-        return trainId + " | " + name + " | " + source + " | " + destination + " | " + " Seats Avilable: " + avilableSeats;
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        return trainId + " | " + name + " | " + source + " -> " + destination +
+                " | Date: " + departureDate.format(dateFormatter) +
+                " | Departure: " + departureTime.format(timeFormatter) +
+                " | Arrival: " + arrivalTime.format(timeFormatter) +
+                " | Seats Available: " + avilableSeats;
     }
 }

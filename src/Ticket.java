@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 public class Ticket {
 
     private int ticketId;
@@ -57,6 +60,16 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return "Ticked ID: " + ticketId + " | Train: " + train.getName() + " | Route: " + train.getSource() + " -> " + train.getDestination() + " Seats " + seatBooked + " | Booked By: " + user.getFullName();
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        return "Ticket ID: " + ticketId +
+                " | Train: " + train.getName() +
+                " | Route: " + train.getSource() + " -> " + train.getDestination() +
+                " | Date: " + train.getDepartureDate().format(dateFormatter) +
+                " | Departure: " + train.getDepartureTime().format(timeFormatter) +
+                " | Arrival: " + train.getArrivalTime().format(timeFormatter) +
+                " | Seats: " + seatBooked +
+                " | Booked By: " + user.getFullName();
     }
 }
