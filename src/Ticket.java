@@ -70,6 +70,7 @@ public class Ticket {
                 " | Departure: " + train.getDepartureTime().format(timeFormatter) +
                 " | Arrival: " + train.getArrivalTime().format(timeFormatter) +
                 " | Seats: " + seatBooked +
-                " | Booked By: " + user.getFullName();
+                " | Booked By: " + user.getFullName() +
+                " | Age: " + user.getAge();
     }
 }

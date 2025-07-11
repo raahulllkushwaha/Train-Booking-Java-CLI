@@ -58,10 +58,13 @@ public class IRCTC {
         scanner.nextLine();
         String fullName = scanner.nextLine();
 
+        System.out.println("Enter age");
+        String age = scanner.next();
+
         System.out.println("Enter Contact: ");
         String contact = scanner.next();
 
-        userService.registerUser(username, password, fullName, contact);
+        userService.registerUser(username, password, fullName, contact, age);
     }
 
     public void login() {

@@ -3,12 +3,14 @@ public class User {
     private String password;
     private String fullName;
     private String contact;
+    private String age;
 
-    public User(String username, String password, String fullName, String contact) {
+    public User(String username, String password, String fullName, String contact, String age) {
         this.username = username;
         this.password = password;
         this.fullName = fullName;
         this.contact = contact;
+        this.age = age;
     }
 
     public String getUsername() {
@@ -41,6 +43,13 @@ public class User {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
     }
     @Override
     public String toString(){
